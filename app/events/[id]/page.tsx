@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import { EventProvider, useEvents } from "../../context/EventContext";
 import { EventDetail } from "../../components/EventDetail";
-import { useQuickAuth, useMiniKit } from "@coinbase/onchainkit/minikit";
+import { useQuickAuth } from "@coinbase/onchainkit/minikit";
 
 interface AuthResponse {
   success: boolean;
@@ -18,7 +18,6 @@ interface AuthResponse {
 function EventDetailContent() {
   const params = useParams();
   const eventId = params.id as string;
-  const { context } = useMiniKit();
   const { rsvpToEvent, cancelRsvp } = useEvents();
 
   const { data: authData } = useQuickAuth<AuthResponse>("/api/auth", {
@@ -59,4 +58,3 @@ export default function EventDetailPage() {
     </EventProvider>
   );
 }
-

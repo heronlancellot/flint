@@ -1,6 +1,5 @@
 "use client";
 
-import { Event } from "../types/event";
 import { EventCard } from "./EventCard";
 import { useEvents } from "../context/EventContext";
 import styles from "./EventList.module.css";
@@ -10,7 +9,10 @@ interface EventListProps {
   filter?: "upcoming" | "past" | "all";
 }
 
-export function EventList({ currentUserFid, filter = "upcoming" }: EventListProps) {
+export function EventList({
+  currentUserFid,
+  filter = "upcoming",
+}: EventListProps) {
   const { events, loading, error, rsvpToEvent, cancelRsvp } = useEvents();
 
   const handleRsvp = async (eventId: string) => {
@@ -87,4 +89,3 @@ export function EventList({ currentUserFid, filter = "upcoming" }: EventListProp
     </div>
   );
 }
-

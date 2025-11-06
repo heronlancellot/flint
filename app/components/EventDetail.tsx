@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -12,7 +13,12 @@ interface EventDetailProps {
   onCancelRsvp?: (eventId: string) => void;
 }
 
-export function EventDetail({ eventId, currentUserFid, onRsvp, onCancelRsvp }: EventDetailProps) {
+export function EventDetail({
+  eventId,
+  currentUserFid,
+  onRsvp,
+  onCancelRsvp,
+}: EventDetailProps) {
   const router = useRouter();
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
@@ -77,8 +83,12 @@ export function EventDetail({ eventId, currentUserFid, onRsvp, onCancelRsvp }: E
 
   const eventDate = new Date(event.date);
   const isPastEvent = eventDate < new Date();
-  const isUserAttending = currentUserFid ? event.attendees.includes(currentUserFid) : false;
-  const isFull = event.maxAttendees ? event.attendees.length >= event.maxAttendees : false;
+  const isUserAttending = currentUserFid
+    ? event.attendees.includes(currentUserFid)
+    : false;
+  const isFull = event.maxAttendees
+    ? event.attendees.length >= event.maxAttendees
+    : false;
   const canRsvp = !isPastEvent && !isFull && !isUserAttending;
 
   const formatDate = (date: Date) => {
@@ -100,7 +110,11 @@ export function EventDetail({ eventId, currentUserFid, onRsvp, onCancelRsvp }: E
 
       {event.imageUrl && (
         <div className={styles.imageContainer}>
-          <img src={event.imageUrl} alt={event.title} className={styles.image} />
+          <img
+            src={event.imageUrl}
+            alt={event.title}
+            className={styles.image}
+          />
         </div>
       )}
 
@@ -165,12 +179,20 @@ export function EventDetail({ eventId, currentUserFid, onRsvp, onCancelRsvp }: E
         {!isPastEvent && (
           <div className={styles.actions}>
             <button
-              className={`${styles.rsvpButton} ${isUserAttending ? styles.rsvpButtonActive : ""} ${!canRsvp && !isUserAttending ? styles.rsvpButtonDisabled : ""}`}
+              className={`${styles.rsvpButton} ${
+                isUserAttending ? styles.rsvpButtonActive : ""
+              } ${
+                !canRsvp && !isUserAttending ? styles.rsvpButtonDisabled : ""
+              }`}
               onClick={isUserAttending ? handleCancelRsvp : handleRsvp}
               disabled={!canRsvp && !isUserAttending}
               aria-label={isUserAttending ? "Cancel RSVP" : "RSVP to event"}
             >
-              {isUserAttending ? "✓ Going" : isFull ? "Event Full" : "RSVP to Event"}
+              {isUserAttending
+                ? "✓ Going"
+                : isFull
+                ? "Event Full"
+                : "RSVP to Event"}
             </button>
           </div>
         )}
@@ -184,4 +206,3 @@ export function EventDetail({ eventId, currentUserFid, onRsvp, onCancelRsvp }: E
     </div>
   );
 }
-

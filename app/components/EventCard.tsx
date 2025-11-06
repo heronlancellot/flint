@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { Event } from "../types/event";
@@ -11,12 +12,21 @@ interface EventCardProps {
   onCancelRsvp?: (eventId: string) => void;
 }
 
-export function EventCard({ event, currentUserFid, onRsvp, onCancelRsvp }: EventCardProps) {
+export function EventCard({
+  event,
+  currentUserFid,
+  onRsvp,
+  onCancelRsvp,
+}: EventCardProps) {
   const router = useRouter();
   const eventDate = new Date(event.date);
   const isPastEvent = eventDate < new Date();
-  const isUserAttending = currentUserFid ? event.attendees.includes(currentUserFid) : false;
-  const isFull = event.maxAttendees ? event.attendees.length >= event.maxAttendees : false;
+  const isUserAttending = currentUserFid
+    ? event.attendees.includes(currentUserFid)
+    : false;
+  const isFull = event.maxAttendees
+    ? event.attendees.length >= event.maxAttendees
+    : false;
   const canRsvp = !isPastEvent && !isFull && !isUserAttending;
 
   const handleCardClick = () => {
@@ -43,13 +53,22 @@ export function EventCard({ event, currentUserFid, onRsvp, onCancelRsvp }: Event
   };
 
   return (
-    <article className={styles.card} onClick={handleCardClick} role="button" tabIndex={0}>
+    <article
+      className={styles.card}
+      onClick={handleCardClick}
+      role="button"
+      tabIndex={0}
+    >
       {event.imageUrl && (
         <div className={styles.imageContainer}>
-          <img src={event.imageUrl} alt={event.title} className={styles.image} />
+          <img
+            src={event.imageUrl}
+            alt={event.title}
+            className={styles.image}
+          />
         </div>
       )}
-      
+
       <div className={styles.content}>
         <div className={styles.header}>
           <h3 className={styles.title}>{event.title}</h3>
@@ -80,14 +99,16 @@ export function EventCard({ event, currentUserFid, onRsvp, onCancelRsvp }: Event
           </div>
 
           {event.price && (
-            <div className={styles.price}>
-              💰 {event.price} USDC
-            </div>
+            <div className={styles.price}>💰 {event.price} USDC</div>
           )}
 
           {!isPastEvent && (
             <button
-              className={`${styles.rsvpButton} ${isUserAttending ? styles.rsvpButtonActive : ""} ${!canRsvp && !isUserAttending ? styles.rsvpButtonDisabled : ""}`}
+              className={`${styles.rsvpButton} ${
+                isUserAttending ? styles.rsvpButtonActive : ""
+              } ${
+                !canRsvp && !isUserAttending ? styles.rsvpButtonDisabled : ""
+              }`}
               onClick={handleRsvpClick}
               disabled={!canRsvp && !isUserAttending}
               aria-label={isUserAttending ? "Cancel RSVP" : "RSVP to event"}
@@ -100,4 +121,3 @@ export function EventCard({ event, currentUserFid, onRsvp, onCancelRsvp }: Event
     </article>
   );
 }
-

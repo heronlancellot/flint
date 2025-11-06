@@ -2,7 +2,7 @@ import { Event } from "../types/event";
 
 // In-memory storage (replace with database in production)
 // This is a simple implementation for MVP
-let events: Event[] = [];
+const events: Event[] = [];
 
 export function getAllEvents(): Event[] {
   return [...events];
@@ -34,4 +34,3 @@ export function deleteEvent(id: string): boolean {
   }
   return false;
 }
-
