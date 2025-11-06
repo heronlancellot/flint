@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Event, CreateEventInput } from "../../types/event";
+import { Event } from "../../types/event";
 import { getAllEvents, createEvent } from "../../lib/eventStorage";
 
 // Helper to generate unique ID
@@ -52,7 +52,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          message: "Missing required fields: title, description, date, location, creatorFid",
+          message:
+            "Missing required fields: title, description, date, location, creatorFid",
         },
         { status: 400 }
       );
@@ -98,4 +99,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
