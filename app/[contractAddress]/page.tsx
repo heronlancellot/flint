@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { EVENT_ABI } from "../lib/abi";
 import Link from "next/link";
@@ -24,9 +24,9 @@ interface EventDetails {
 export default function EventPageDetails({
   params,
 }: {
-  params: { contractAddress: string };
+  params: Promise<{ contractAddress: string }>;
 }) {
-  const { contractAddress } = params;
+  const { contractAddress } = use(params);
   const { address, isConnected } = useAccount();
   const [eventDetails, setEventDetails] = useState<EventDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
