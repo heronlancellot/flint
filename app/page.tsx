@@ -24,7 +24,7 @@ import { useFarcasterAuth } from "./hooks/useFarcasterAuth";
 type View = "events" | "create";
 
 function HomeContent() {
-  const { isFrameReady, setFrameReady, context } = useMiniKit();
+  const { setFrameReady, context } = useMiniKit();
   const { address, isConnected } = useAccount();
   const addFrame = useAddFrame();
   const [view, setView] = useState<View>("events");
@@ -34,10 +34,11 @@ function HomeContent() {
 
   // Initialize the miniapp
   useEffect(() => {
-    if (!isFrameReady) {
-      setFrameReady();
-    }
-  }, [setFrameReady, isFrameReady]);
+    setFrameReady().catch((error) => {
+      console.error('MiniKit initialization error:', error);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const currentUserFid = userData?.fid;
   const currentUserName = context?.user?.displayName;
