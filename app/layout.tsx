@@ -4,6 +4,7 @@ import { SafeArea } from "@coinbase/onchainkit/minikit";
 import { minikitConfig } from "../minikit.config";
 import { RootProvider } from "./rootProvider";
 import "./globals.css";
+import { ReactNode } from "react";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -38,7 +39,7 @@ const sourceCodePro = Source_Code_Pro({
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <RootProvider>
