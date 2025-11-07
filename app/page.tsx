@@ -35,7 +35,7 @@ function HomeContent() {
   // Initialize the miniapp
   useEffect(() => {
     setFrameReady().catch((error) => {
-      console.error('MiniKit initialization error:', error);
+      console.error("MiniKit initialization error:", error);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -71,7 +71,7 @@ function HomeContent() {
         <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:gap-8 mb-4">
           <div className="flex-1 text-center md:text-left">
             <h1 className="text-[clamp(2rem,5vw,3rem)] font-bold tracking-tight mb-2 bg-gradient-to-br from-white to-[#e0e0e0] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]">
-              Event Platform
+              Flik Platform
             </h1>
             <p className="text-lg leading-relaxed text-white/70 font-light">
               {currentUserName
