@@ -13,7 +13,7 @@ export async function GET() {
     const events = getAllEvents();
     // Sort by date (upcoming first)
     const sortedEvents = [...events].sort((a, b) => {
-      return new Date(a.date).getTime() - new Date(b.date).getTime();
+      return Number(a.startsAt) - Number(b.startsAt);
     });
 
     return NextResponse.json({
@@ -68,19 +68,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Convert date to Unix timestamp (seconds)
+    const startsAtTimestamp = Math.floor(eventDate.getTime() / 1000);
+
     const newEvent: Event = {
       id: generateId(),
       title,
       description,
       date: eventDate.toISOString(),
       location,
+      maxAttendees: maxAttendees ? Number(maxAttendees) : 100, // Default to 100 if not provided
+      tags: category ? [category] : [], // Convert category to tags array
+      startsAt: BigInt(startsAtTimestamp),
+      endsAt: BigInt(startsAtTimestamp + 7200), // Default to 2 hours after start
       imageUrl: imageUrl || undefined,
       creatorFid: Number(creatorFid),
       creatorName: creatorName || undefined,
       creatorAddress: undefined, // Will be added when wallet integration is implemented
       attendees: [],
       category: category || undefined,
-      maxAttendees: maxAttendees ? Number(maxAttendees) : undefined,
       price: price ? Number(price) : undefined,
       createdAt: new Date().toISOString(),
     };

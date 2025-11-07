@@ -2,15 +2,19 @@ export interface Event {
   id: string;
   title: string;
   description: string;
-  date: string; // ISO string
   location: string;
+  maxAttendees: number; // Obrigatório conforme contrato
+  tags: string[]; // Array de tags do contrato
+  startsAt: bigint; // Timestamp Unix (segundos) - obrigatório
+  endsAt: bigint; // Timestamp Unix (segundos) - obrigatório
+  // Campos de compatibilidade/UI (opcionais)
+  date?: string; // ISO string - mantido para compatibilidade com componentes existentes
   imageUrl?: string;
   creatorFid: number;
   creatorName?: string;
   creatorAddress?: string;
   attendees: number[]; // Array of FIDs
-  category?: string;
-  maxAttendees?: number;
+  category?: string; // Mantido para compatibilidade, pode ser derivado de tags[0]
   price?: number; // in USDC (optional)
   createdAt: string; // ISO string
 }
@@ -18,11 +22,11 @@ export interface Event {
 export interface CreateEventInput {
   title: string;
   description: string;
-  date: string;
   location: string;
-  imageUrl?: string;
-  category?: string;
   maxAttendees?: number;
+  category?: string;
+  startsAt: string; // datetime-local format
+  endsAt: string; // datetime-local format
+  imageUrl?: string;
   price?: number;
 }
-

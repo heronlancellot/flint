@@ -83,14 +83,13 @@ export function EventDetail({
     );
   }
 
-  const eventDate = new Date(event.date);
+  // Convert startsAt (Unix timestamp in seconds) to Date
+  const eventDate = new Date(Number(event.startsAt) * 1000);
   const isPastEvent = eventDate < new Date();
   const isUserAttending = currentUserFid
     ? event.attendees.includes(currentUserFid)
     : false;
-  const isFull = event.maxAttendees
-    ? event.attendees.length >= event.maxAttendees
-    : false;
+  const isFull = event.attendees.length >= event.maxAttendees;
   const canRsvp = !isPastEvent && !isFull && !isUserAttending;
 
   const formatDate = (date: Date) => {
@@ -158,8 +157,7 @@ export function EventDetail({
             <div className="flex flex-col gap-1">
               <span className="text-white/60 text-xs uppercase tracking-wider font-semibold">Attendees</span>
               <span className="text-white text-base font-medium">
-                {event.attendees.length}
-                {event.maxAttendees && ` / ${event.maxAttendees}`}
+                {event.attendees.length} / {event.maxAttendees}
               </span>
             </div>
           </div>
