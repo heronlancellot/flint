@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useMiniKit, useAddFrame } from "@coinbase/onchainkit/minikit";
 import { useAccount } from "wagmi";
-// import { BrowseEvents } from "./components/BrowseEvents";
+import { BrowseEvents } from "./components/BrowseEvents";
 import { CreateEvent } from "./components/CreateEvent";
 import { Header } from "./components/Header";
 import { AddFrameButton } from "./components/AddFrameButton";
@@ -78,7 +78,7 @@ export default function HomePage() {
       <NavigationTabs currentView={view} onViewChange={setView} />
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto">
-        {/* {view === "events" && <BrowseEvents currentUserFid={currentUserFid} />} */}
+        {view === "events" && <BrowseEvents currentUserFid={currentUserFid} />}
 
         {view === "create" && (
           <CreateEvent
