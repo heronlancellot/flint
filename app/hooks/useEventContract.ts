@@ -37,6 +37,8 @@ export function useEventContract() {
         "EVENT_FACTORY"
       );
 
+      console.log(" contractAddress", contractAddress);
+      console.log(" params", params);
       writeContract({
         address: contractAddress,
         abi: eventABI,
@@ -50,6 +52,7 @@ export function useEventContract() {
           params.startsAt,
           params.endsAt,
         ],
+        maxFeePerGas: BigInt(1000000000000000000),
       });
 
       return hash;

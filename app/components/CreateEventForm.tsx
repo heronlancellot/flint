@@ -72,19 +72,19 @@ export function CreateEventForm({
     }
 
     // Validate dates
-    // const startsAtDate = new Date(formData.startsAt);
-    // const endsAtDate = new Date(formData.endsAt);
-    // const now = new Date();
+    const startsAtDate = new Date(formData.startsAt);
+    const endsAtDate = new Date(formData.endsAt);
+    const now = new Date();
 
-    // if (startsAtDate < now) {
-    //   setFormError("Event start date must be in the future");
-    //   return;
-    // }
+    if (startsAtDate < now) {
+      setFormError("Event start date must be in the future");
+      return;
+    }
 
-    // if (endsAtDate <= startsAtDate) {
-    //   setFormError("Event end date must be after start date");
-    //   return;
-    // }
+    if (endsAtDate <= startsAtDate) {
+      setFormError("Event end date must be after start date");
+      return;
+    }
 
     try {
       // Prepara os dados para o contrato
@@ -241,6 +241,7 @@ export function CreateEventForm({
             name="startsAt"
             value={formData.startsAt}
             onChange={handleChange}
+            min={new Date().toISOString().slice(0, 16)}
             className="w-full px-4 py-3 text-base bg-white/10 border-2 border-white/20 rounded-lg text-white backdrop-blur-[10px] transition-all duration-300 font-inherit placeholder:text-white/50 focus:outline-none focus:border-white/40 focus:bg-white/15 focus:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
             required
             aria-required="true"
@@ -260,6 +261,7 @@ export function CreateEventForm({
             name="endsAt"
             value={formData.endsAt}
             onChange={handleChange}
+            min={formData.startsAt || new Date().toISOString().slice(0, 16)}
             className="w-full px-4 py-3 text-base bg-white/10 border-2 border-white/20 rounded-lg text-white backdrop-blur-[10px] transition-all duration-300 font-inherit placeholder:text-white/50 focus:outline-none focus:border-white/40 focus:bg-white/15 focus:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
             required
             aria-required="true"
