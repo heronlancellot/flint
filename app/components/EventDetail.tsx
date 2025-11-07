@@ -64,7 +64,9 @@ export function EventDetail({
   if (loading) {
     return (
       <div className="w-full max-w-[900px] mx-auto py-8 px-4">
-        <div className="text-center py-12 px-4 text-white/80 text-lg">Loading event...</div>
+        <div className="text-center py-12 px-4 text-white/80 text-lg">
+          Loading event...
+        </div>
       </div>
     );
   }
@@ -72,9 +74,11 @@ export function EventDetail({
   if (error || !event) {
     return (
       <div className="w-full max-w-[900px] mx-auto py-8 px-4">
-        <div className="text-center py-12 px-4 text-[#ff6b6b] text-lg">{error || "Event not found"}</div>
-        <button 
-          onClick={() => router.back()} 
+        <div className="text-center py-12 px-4 text-[#ff6b6b] text-lg">
+          {error || "Event not found"}
+        </div>
+        <button
+          onClick={() => router.back()}
           className="bg-white/10 border-2 border-white/20 text-white px-6 py-3 rounded-lg cursor-pointer text-base font-semibold mb-8 transition-all duration-300 backdrop-blur-[10px] hover:bg-white/15 hover:border-white/30 hover:-translate-x-1"
         >
           Go Back
@@ -83,7 +87,7 @@ export function EventDetail({
     );
   }
 
-  const eventDate = new Date(event.date);
+  const eventDate = new Date(event.date || "");
   const isPastEvent = eventDate < new Date();
   const isUserAttending = currentUserFid
     ? event.attendees.includes(currentUserFid)
@@ -106,8 +110,8 @@ export function EventDetail({
 
   return (
     <div className="w-full max-w-[900px] mx-auto py-8 px-4 md:px-4">
-      <button 
-        onClick={() => router.back()} 
+      <button
+        onClick={() => router.back()}
         className="bg-white/10 border-2 border-white/20 text-white px-6 py-3 rounded-lg cursor-pointer text-base font-semibold mb-8 transition-all duration-300 backdrop-blur-[10px] hover:bg-white/15 hover:border-white/30 hover:-translate-x-1"
       >
         ← Back
@@ -126,14 +130,21 @@ export function EventDetail({
       <article className="bg-white/5 border-2 border-white/10 rounded-2xl p-8 md:p-8 backdrop-blur-[10px]">
         <header className="mb-8">
           <div className="flex justify-between items-start gap-4 mb-4">
-            <h1 className="text-4xl md:text-[2.5rem] font-bold text-white m-0 leading-tight flex-1">{event.title}</h1>
+            <h1 className="text-4xl md:text-[2.5rem] font-bold text-white m-0 leading-tight flex-1">
+              {event.title}
+            </h1>
             {event.category && (
-              <span className="bg-[rgba(247,217,84,0.2)] text-[#f7d954] px-4 py-2 rounded-xl text-sm font-semibold uppercase whitespace-nowrap self-start">{event.category}</span>
+              <span className="bg-[rgba(247,217,84,0.2)] text-[#f7d954] px-4 py-2 rounded-xl text-sm font-semibold uppercase whitespace-nowrap self-start">
+                {event.category}
+              </span>
             )}
           </div>
           {event.creatorName && (
             <p className="text-white/70 text-base m-0">
-              Created by <strong className="text-white font-semibold">{event.creatorName}</strong>
+              Created by{" "}
+              <strong className="text-white font-semibold">
+                {event.creatorName}
+              </strong>
             </p>
           )}
         </header>
@@ -142,21 +153,31 @@ export function EventDetail({
           <div className="flex items-start gap-4">
             <span className="text-2xl flex-shrink-0">📅</span>
             <div className="flex flex-col gap-1">
-              <span className="text-white/60 text-xs uppercase tracking-wider font-semibold">Date & Time</span>
-              <span className="text-white text-base font-medium">{formatDate(eventDate)}</span>
+              <span className="text-white/60 text-xs uppercase tracking-wider font-semibold">
+                Date & Time
+              </span>
+              <span className="text-white text-base font-medium">
+                {formatDate(eventDate)}
+              </span>
             </div>
           </div>
           <div className="flex items-start gap-4">
             <span className="text-2xl flex-shrink-0">📍</span>
             <div className="flex flex-col gap-1">
-              <span className="text-white/60 text-xs uppercase tracking-wider font-semibold">Location</span>
-              <span className="text-white text-base font-medium">{event.location}</span>
+              <span className="text-white/60 text-xs uppercase tracking-wider font-semibold">
+                Location
+              </span>
+              <span className="text-white text-base font-medium">
+                {event.location}
+              </span>
             </div>
           </div>
           <div className="flex items-start gap-4">
             <span className="text-2xl flex-shrink-0">👥</span>
             <div className="flex flex-col gap-1">
-              <span className="text-white/60 text-xs uppercase tracking-wider font-semibold">Attendees</span>
+              <span className="text-white/60 text-xs uppercase tracking-wider font-semibold">
+                Attendees
+              </span>
               <span className="text-white text-base font-medium">
                 {event.attendees.length}
                 {event.maxAttendees && ` / ${event.maxAttendees}`}
@@ -167,7 +188,9 @@ export function EventDetail({
             <div className="flex items-start gap-4">
               <span className="text-2xl flex-shrink-0">💰</span>
               <div className="flex flex-col gap-1">
-                <span className="text-white/60 text-xs uppercase tracking-wider font-semibold">Price</span>
+                <span className="text-white/60 text-xs uppercase tracking-wider font-semibold">
+                  Price
+                </span>
                 <span className="text-white text-base font-medium">
                   {event.price === 0 ? "Free" : `${event.price} USDC`}
                 </span>
@@ -178,7 +201,9 @@ export function EventDetail({
 
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-white mb-4">About</h2>
-          <p className="text-white/80 text-lg leading-relaxed m-0">{event.description}</p>
+          <p className="text-white/80 text-lg leading-relaxed m-0">
+            {event.description}
+          </p>
         </div>
 
         {!isPastEvent && (

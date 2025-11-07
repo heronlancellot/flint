@@ -18,7 +18,7 @@ export function EventCard({
   onCancelRsvp,
 }: EventCardProps) {
   const router = useRouter();
-  const eventDate = new Date(event.date);
+  const eventDate = new Date(event.date || "");
   const isPastEvent = eventDate < new Date();
   const isUserAttending = currentUserFid
     ? event.attendees.includes(currentUserFid)
@@ -70,13 +70,19 @@ export function EventCard({
 
       <div className="p-6 flex flex-col gap-4 flex-1">
         <div className="flex justify-between items-start gap-4">
-          <h3 className="text-xl font-bold text-white m-0 flex-1 leading-tight">{event.title}</h3>
+          <h3 className="text-xl font-bold text-white m-0 flex-1 leading-tight">
+            {event.title}
+          </h3>
           {event.category && (
-            <span className="bg-[rgba(247,217,84,0.2)] text-[#f7d954] px-3 py-1 rounded-xl text-xs font-semibold uppercase whitespace-nowrap">{event.category}</span>
+            <span className="bg-[rgba(247,217,84,0.2)] text-[#f7d954] px-3 py-1 rounded-xl text-xs font-semibold uppercase whitespace-nowrap">
+              {event.category}
+            </span>
           )}
         </div>
 
-        <p className="text-white/70 text-sm leading-relaxed m-0 line-clamp-2">{event.description}</p>
+        <p className="text-white/70 text-sm leading-relaxed m-0 line-clamp-2">
+          {event.description}
+        </p>
 
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2 text-sm">
@@ -98,7 +104,9 @@ export function EventCard({
           </div>
 
           {event.price && (
-            <div className="text-[#f7d954] font-semibold text-sm">💰 {event.price} USDC</div>
+            <div className="text-[#f7d954] font-semibold text-sm">
+              💰 {event.price} USDC
+            </div>
           )}
 
           {!isPastEvent && (
