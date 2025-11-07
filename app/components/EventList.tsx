@@ -30,7 +30,8 @@ export function EventList({
   };
 
   const filteredEvents = events.filter((event) => {
-    const eventDate = new Date(event.date);
+    // Convert startsAt (Unix timestamp in seconds) to Date
+    const eventDate = new Date(Number(event.startsAt) * 1000);
     const now = new Date();
 
     if (filter === "upcoming") {

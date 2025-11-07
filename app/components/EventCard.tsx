@@ -18,14 +18,13 @@ export function EventCard({
   onCancelRsvp,
 }: EventCardProps) {
   const router = useRouter();
-  const eventDate = new Date(event.date);
+  // Convert startsAt (Unix timestamp in seconds) to Date
+  const eventDate = new Date(Number(event.startsAt) * 1000);
   const isPastEvent = eventDate < new Date();
   const isUserAttending = currentUserFid
     ? event.attendees.includes(currentUserFid)
     : false;
-  const isFull = event.maxAttendees
-    ? event.attendees.length >= event.maxAttendees
-    : false;
+  const isFull = event.attendees.length >= event.maxAttendees;
   const canRsvp = !isPastEvent && !isFull && !isUserAttending;
 
   const handleCardClick = () => {
@@ -92,8 +91,7 @@ export function EventCard({
         <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/10">
           <div className="flex items-center gap-2">
             <span className="text-white/70 text-sm">
-              👥 {event.attendees.length}
-              {event.maxAttendees && ` / ${event.maxAttendees}`}
+              👥 {event.attendees.length} / {event.maxAttendees}
             </span>
           </div>
 
