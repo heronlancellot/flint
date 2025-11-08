@@ -1,6 +1,5 @@
 import { CreateEventInput } from "../../types/event";
 import { CreatePaidEventContractParams } from "../../hooks/usePaidEventContract";
-import { parseEther } from "viem";
 
 /**
  * Converte os dados do formulário para os parâmetros do contrato
@@ -23,7 +22,7 @@ export function preparePaidEventForContract(
   }
 
   const priceInUSDC = eventInput.price
-    ? parseEther(eventInput.price.toString())
+    ? BigInt(eventInput.price.toString())
     : BigInt(0);
 
   console.log("Price conversion:", {

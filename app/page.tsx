@@ -2,13 +2,10 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useMiniKit, useAddFrame } from "@coinbase/onchainkit/minikit";
-// import { useAccount } from "wagmi";
 import { BrowseEvents } from "./components/BrowseEvents";
 import { CreateEvent } from "./components/CreateEvent";
 import { Header } from "./components/Header";
 import { AddFrameButton } from "./components/AddFrameButton";
-import { WalletSection } from "./components/WalletSection";
-// import { IdentitySection } from "./components/IdentitySection";
 import { NavigationTabs } from "./components/NavigationTabs";
 import { useFarcasterAuth } from "./hooks/useFarcasterAuth";
 import { sdk } from "@farcaster/miniapp-sdk";
@@ -71,14 +68,17 @@ export default function HomePage() {
         <AddFrameButton onAddFrame={handleAddFrame} />
       )}
 
-      <WalletSection />
-
       {/* {isConnected && <IdentitySection address={address} />} */}
 
       <NavigationTabs currentView={view} onViewChange={setView} />
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto">
-        {view === "events" && <BrowseEvents currentUserFid={currentUserFid} />}
+        {view === "events" && (
+          <>
+            {/* <HeroSection onCreateEventClick={() => setView("create")} /> */}
+            <BrowseEvents currentUserFid={currentUserFid} />
+          </>
+        )}
 
         {view === "create" && (
           <CreateEvent

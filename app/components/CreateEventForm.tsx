@@ -105,6 +105,7 @@ export function CreateEventForm({
       // Prepara os dados para o contrato e chama o contrato apropriado
       if (formData.price && formData.price > 0) {
         const contractParams = preparePaidEventForContract(formData);
+        console.log("contractParams", contractParams);
         await createPaidEvent(contractParams);
       } else {
         const contractParams = prepareEventForContract(formData);

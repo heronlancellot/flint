@@ -40,6 +40,7 @@ export function usePaidEventContract() {
 
       console.log(" contractAddress", contractAddress);
       console.log(" params", params);
+      console.log(" price", BigInt(params.price));
       writeContract({
         address: contractAddress,
         abi: PAID_EVENT_FACTORY_ABI,

@@ -4,6 +4,11 @@
   :root {
     --background: #ffffff;
     --foreground: #171717;
+    /* Flik Brand Colors */
+    --flik-primary: #f7d954;
+    --flik-primary-dark: #f5d73a;
+    --flik-gradient-start: #f7d954;
+    --flik-gradient-end: #f5d73a;
   }
 
   @media (prefers-color-scheme: dark) {
