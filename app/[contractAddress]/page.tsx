@@ -409,9 +409,9 @@ export default function EventPageDetails({
                       {isWritePending || isConfirming
                         ? "Processing..."
                         : eventDetails.price !== undefined
-                        ? `Buy Ticket - $${
-                            Number(formatEther(eventDetails.price)) / 1e18
-                          } USD`
+                        ? `Buy Ticket - $${Number(
+                            formatEther(eventDetails.price)
+                          )} USD`
                         : "Join Event (Free)"}
                     </button>
                   ) : (
