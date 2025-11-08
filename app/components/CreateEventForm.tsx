@@ -9,18 +9,11 @@ import { preparePaidEventForContract } from "../lib/service/createPaidEvent";
 import { usePaidEventContract } from "../hooks/usePaidEventContract";
 
 interface CreateEventFormProps {
-  creatorFid: number;
-  creatorName?: string;
   onSuccess?: () => void;
   onCancel?: () => void;
 }
 
-export function CreateEventForm({
-  // creatorFid,
-  // creatorName,
-  onSuccess,
-  onCancel,
-}: CreateEventFormProps) {
+export function CreateEventForm({ onSuccess, onCancel }: CreateEventFormProps) {
   const {
     createPublicEvent,
     isPending: isPendingPublic,

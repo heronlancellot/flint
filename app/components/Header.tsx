@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { Avatar } from "@coinbase/onchainkit/identity";
-import { useAccount } from "wagmi";
 import { WalletSection } from "./WalletSection";
 
 interface HeaderProps {
@@ -11,8 +9,6 @@ interface HeaderProps {
 }
 
 export function Header({ currentUserName, error }: HeaderProps) {
-  const { address } = useAccount();
-
   return (
     <header className="mb-8 flex  w-full justify-between items-center">
       <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:gap-8 mb-4">
@@ -44,11 +40,6 @@ export function Header({ currentUserName, error }: HeaderProps) {
             )}
           </div>
         </div>
-        {address && (
-          <div className="flex items-center gap-3">
-            <Avatar className="h-12 w-12 ring-2 ring-[#f7d954]/50" />
-          </div>
-        )}
       </div>
       {error && (
         <div

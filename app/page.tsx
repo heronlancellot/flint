@@ -3,12 +3,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { useMiniKit, useAddFrame } from "@coinbase/onchainkit/minikit";
 import { BrowseEvents } from "./components/BrowseEvents";
-import { CreateEvent } from "./components/CreateEvent";
 import { Header } from "./components/Header";
 import { AddFrameButton } from "./components/AddFrameButton";
 import { NavigationTabs } from "./components/NavigationTabs";
 import { useFarcasterAuth } from "./hooks/useFarcasterAuth";
 import { sdk } from "@farcaster/miniapp-sdk";
+import { CreateEventForm } from "./components/CreateEventForm";
 
 type View = "events" | "create";
 
@@ -68,8 +68,6 @@ export default function HomePage() {
         <AddFrameButton onAddFrame={handleAddFrame} />
       )}
 
-      {/* {isConnected && <IdentitySection address={address} />} */}
-
       <NavigationTabs currentView={view} onViewChange={setView} />
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto">
@@ -81,9 +79,7 @@ export default function HomePage() {
         )}
 
         {view === "create" && (
-          <CreateEvent
-            creatorFid={currentUserFid!}
-            creatorName={currentUserName}
+          <CreateEventForm
             onSuccess={handleCreateSuccess}
             onCancel={() => setView("events")}
           />
